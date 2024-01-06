@@ -1,0 +1,19 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "name": "Harry Potter and the Philosopher's Stone",
+      "author": "J.K. Rowling"
+    },
+    {
+      "id": 2,
+      "name": "Harry Potter and the Deathly Hallows P.1",
+      "author": "J.K. Rowling"
+    },
+    {
+      "id": 3,
+      "name": "The Ring Sets Out",
+      "author": "J. R. R. Tolkien"
+    }
+  ]
+}
