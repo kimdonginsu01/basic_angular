@@ -1,1 +1,105 @@
-<p>login works!</p>
+<p-toast></p-toast>
+<form
+  [formGroup]="loginForm"
+  (ngSubmit)="login()"
+  class="h-screen flex align-items-center surface-300"
+>
+  <div
+    class="flex justify-content-center align-items-center gap-3 flex-column w-25rem shadow-1 p-3 m-auto border-round bg-white"
+  >
+    <h1>Login</h1>
+    <div class="w-full">
+      <label for="username" class="p-sr-only">Username</label>
+      <input
+        class="w-full"
+        id="username"
+        type="text"
+        pInputText
+        formControlName="username"
+        placeholder="Username"
+      />
+
+      <div
+        class="mt-1"
+        *ngIf="
+          loginForm.get('username')?.invalid &&
+          loginForm.get('username')?.errors &&
+          (loginForm.get('username')?.dirty ||
+            loginForm.get('username')?.touched)
+        "
+      >
+        <small
+          class="text-red-500"
+          *ngIf="loginForm.get('username')?.hasError('required')"
+          >Username is required.</small
+        >
+        <small
+          class="text-red-500"
+          *ngIf="loginForm.get('username')?.errors?.['pattern']"
+          >No special characters allowed.</small
+        >
+        <small
+          class="text-red-500"
+          *ngIf="!loginForm.get('username')?.errors?.['pattern'] && loginForm.get('username')?.errors?.['minlength']"
+          >Try longer.</small
+        >
+        <small
+          class="text-red-500"
+          *ngIf="!loginForm.get('username')?.errors?.['pattern'] && loginForm.get('username')?.errors?.['maxlength']"
+          >Try shorter.</small
+        >
+      </div>
+    </div>
+    <div class="w-full">
+      <label for="password" class="p-sr-only">Password</label>
+      <input
+        class="w-full"
+        id="password"
+        type="password"
+        pInputText
+        formControlName="password"
+        placeholder="Password"
+      />
+
+      <div
+        class="mt-1"
+        *ngIf="
+          loginForm.get('password')?.invalid &&
+          loginForm.get('password')?.errors &&
+          (loginForm.get('password')?.dirty ||
+            loginForm.get('password')?.touched)
+        "
+      >
+        <small
+          class="text-red-500"
+          *ngIf="loginForm.get('password')?.hasError('required')"
+          >Password is required.</small
+        >
+        <small
+          class="text-red-500"
+          *ngIf="loginForm.get('password')?.errors?.['pattern']"
+          >At least contains 1 letter, 1 number and 1 special character.</small
+        >
+        <small
+          class="text-red-500"
+          *ngIf="!loginForm.get('password')?.errors?.['pattern'] && loginForm.get('password')?.errors?.['minlength']"
+          >Try longer.</small
+        >
+        <small
+          class="text-red-500"
+          *ngIf="!loginForm.get('password')?.errors?.['pattern'] && loginForm.get('password')?.errors?.['maxlength']"
+          >Try shorter.</small
+        >
+      </div>
+    </div>
+    <div class="w-full flex justify-content-between text-sm">
+      <p-button
+        [link]="true"
+        label="Forgot password"
+        styleClass="text-700"
+      ></p-button>
+      <p-button [link]="true" label="No account yet?"></p-button>
+    </div>
+    <button pButton type="submit" label="Login"></button>
+  </div>
+</form>

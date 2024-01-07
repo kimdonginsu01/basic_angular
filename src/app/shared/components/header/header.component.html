@@ -1,1 +1,28 @@
-<p>header works!</p>
+<header>
+  <p-menubar [model]="items">
+    <ng-template pTemplate="start">
+      <img
+        alt="logo"
+        src="https://th.bing.com/th/id/OIG.4CjEhOnvhJOXlMDdf20E?pid=ImgGn"
+        height="80"
+        class="mr-2"
+      />
+    </ng-template>
+
+    <ng-template pTemplate="end">
+      <div class="flex gap-3 align-items-center">
+        <div class="cart mr-2">
+          <a routerLink="/cart">
+            <i class="pi pi-shopping-cart"></i>
+          </a>
+        </div>
+        <div class="login">
+          <p-button
+            label="Logout"
+            (click)="authService.logout()"
+          ></p-button>
+        </div>
+      </div>
+    </ng-template>
+  </p-menubar>
+</header>
