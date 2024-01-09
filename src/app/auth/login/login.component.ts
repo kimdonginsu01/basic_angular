@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { catchError, throwError } from 'rxjs';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
       username: [
@@ -61,10 +63,12 @@ export class LoginComponent {
             localStorage.setItem('user', JSON.stringify(response[0]));
             this.authService.isAuthenticated = true;
 
+            this.router.navigate(['/']);
+
             setTimeout(() => {
               localStorage.removeItem('user');
               this.authService.isAuthenticated = false;
-            }, 30000);
+            }, 10000);
           } else {
             this.messageService.add({
               severity: 'warn',

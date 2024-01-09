@@ -11,13 +11,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    // BrowserModule,
-    // BrowserAnimationsModule,
     CommonModule,
     SharedModule,
     AuthModule,
@@ -30,6 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ButtonModule,
     HttpClientModule,
     ReactiveFormsModule,
+    ToastModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
