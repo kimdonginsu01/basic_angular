@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { authGuard } from './auth/auth.guard';
-import { HeaderComponent } from './shared/components/header/header.component';
+import { LayoutComponent } from './shared/components/layout/layout.component';
 
 export const routes: Routes = [
   {
@@ -10,13 +10,9 @@ export const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'home',
-    component: HeaderComponent,
-    canActivate: [authGuard],
-  },
-  {
     path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
+    title: 'Home',
+    component: LayoutComponent,
+    canActivate: [authGuard],
   },
 ];
