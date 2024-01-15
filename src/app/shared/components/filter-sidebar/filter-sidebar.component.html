@@ -1,0 +1,28 @@
+<div class="flex flex-column mt-3 gap-3">
+  <label for="">Author</label>
+  <p-dropdown
+    styleClass="w-full"
+    placeholder="Select Author"
+    [options]="authors"
+  ></p-dropdown>
+
+  <label for="">Price</label>
+  <p-slider styleClass="w-full" [(ngModel)]="priceRange" [range]="true" [min]="0" [max]="500"></p-slider>
+
+  <label for="">Genres</label>
+  <p-multiSelect
+    styleClass="w-full"
+    placeholder="Select Genres"
+    [options]="genres"
+  ></p-multiSelect>
+
+  <label for="">Published year</label>
+  <p-dropdown
+    styleClass="w-full"
+    placeholder="Select Year"
+    [options]="years"
+  ></p-dropdown>
+
+  <label for="">Rating</label>
+  <p-rating styleClass="w-full" [(ngModel)]="rating"></p-rating>
+</div>

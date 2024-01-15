@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
   public isAuthenticated = !!localStorage.getItem('user');
 
-  constructor(private httpService: HttpService, private router: Router) {}
+  constructor(private httpService: HttpService) {}
 
   login(credentials?: any): Observable<any> {
     return this.httpService.get(baseUrl + `/users`, credentials);

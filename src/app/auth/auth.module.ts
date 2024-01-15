@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { LoginComponent } from './login/login.component';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -16,6 +17,6 @@ import { LoginComponent } from './login/login.component';
     InputTextModule,
     ToastModule,
   ],
-  providers: [MessageService],
+  providers: [MessageService, AuthService],
 })
 export class AuthModule {}
