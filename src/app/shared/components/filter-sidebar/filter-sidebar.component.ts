@@ -7,6 +7,7 @@ import { RatingModule } from 'primeng/rating';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-filter-sidebar',
@@ -19,6 +20,7 @@ import { ButtonModule } from 'primeng/button';
     MultiSelectModule,
     RatingModule,
     ButtonModule,
+    InputTextModule,
     FormsModule
   ],
   templateUrl: './filter-sidebar.component.html',

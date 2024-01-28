@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class HttpService {
   constructor(private http: HttpClient) {}
 
-  get(url: string, params: any): Observable<any> {
+  get(url: string, params?: any): Observable<any> {
     return this.http.get(url, { params });
   }
 

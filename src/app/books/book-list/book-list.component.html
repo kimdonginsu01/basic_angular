@@ -11,7 +11,13 @@
     </div>
     <div class="col-9">
       <div>
-        <p-dataView #dv [value]="products" layout="grid" [rows]="6" [paginator]="true">
+        <p-dataView
+          #dv
+          [value]="products"
+          layout="grid"
+          [rows]="6"
+          [paginator]="true"
+        >
           <!-- <ng-template pTemplate="header">
             <div class="flex justify-content-end">
                 <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
@@ -50,7 +56,7 @@
                 *ngFor="let product of products"
               >
                 <div
-                  class="p-4 border-1 surface-border surface-card border-round"
+                  class="p-4 border-1 surface-border surface-card border-round h-full"
                 >
                   <div
                     class="flex flex-wrap align-items-center justify-content-between gap-2"
@@ -67,13 +73,17 @@
                   <div class="flex flex-column align-items-center gap-3 py-5">
                     <img
                       class="w-9 shadow-2 border-round"
-                      [src]="
-                        'https://primefaces.org/cdn/primeng/images/demo/product/' +
-                        product.image
-                      "
+                      [src]="'https://picsum.photos/468/395?random=' + product.id"
                       [alt]="product.name"
                     />
-                    <div class="text-2xl font-bold">{{ product.name }}</div>
+                    <a
+                      [routerLink]="['/book-detail', product.id]"
+                      class="w-full text-2xl text-700 font-bold no-underline white-space-nowrap overflow-hidden text-overflow-ellipsis"
+                      [pTooltip]="product.name"
+                      tooltipPosition="bottom"
+                    >
+                      {{ product.name }}
+                    </a>
                     <p-rating
                       [ngModel]="product.rating"
                       [readonly]="true"

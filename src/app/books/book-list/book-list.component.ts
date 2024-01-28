@@ -9,6 +9,8 @@ import { Product } from '../shared/models/book';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-book-list',
   standalone: true,
@@ -20,7 +22,9 @@ import { ButtonModule } from 'primeng/button';
     RatingModule,
     CommonModule,
     FormsModule,
-    ButtonModule
+    ButtonModule,
+    RouterModule,
+    TooltipModule,
   ],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.scss',

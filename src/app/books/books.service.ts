@@ -3,13 +3,16 @@ import { HttpService } from '../shared/services/http.service';
 import { baseUrl } from '../shared/constants/constant';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BooksService {
-
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {}
 
   getBooks(params?: any) {
     return this.httpService.get(baseUrl + `/books`, params);
+  }
+
+  getBookDetail(id: string) {
+    return this.httpService.get(baseUrl + `/books/` + id);
   }
 }
