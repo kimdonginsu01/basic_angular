@@ -3,27 +3,30 @@ import { AuthService } from '../../../auth/auth.service';
 import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [
-    ButtonModule,
-    MenubarModule
-  ],
+  imports: [ButtonModule, MenubarModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   items: MenuItem[];
 
-  constructor(public authService: AuthService) {
+  constructor(public authService: AuthService, public router: Router) {
     this.items = [
       { label: 'Home', routerLink: '/home' },
       { label: 'Books', routerLink: '/books' },
       { label: 'Authors', routerLink: '/authors' },
       { label: 'Genres', routerLink: '/genres' },
-      { label: 'Best Sellers', routerLink: '/bestsellers' }
+      { label: 'Best Sellers', routerLink: '/bestsellers' },
     ];
+  }
+
+  handleLogout() {
+    this.authService.logout();
+    this.router.navigate(['login']);
   }
 }

@@ -65,10 +65,10 @@ export class LoginComponent {
 
             this.router.navigate(['/']);
 
-            setTimeout(() => {
-              localStorage.removeItem('user');
-              this.authService.isAuthenticated = false;
-            }, 10000);
+            // setTimeout(() => {
+            //   localStorage.removeItem('user');
+            //   this.authService.isAuthenticated = false;
+            // }, 600000);
           } else {
             this.messageService.add({
               severity: 'warn',

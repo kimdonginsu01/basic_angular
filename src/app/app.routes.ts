@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { authGuard } from './auth/auth.guard';
-import { LayoutComponent } from './shared/components/layout/layout.component';
+import { BookListComponent } from './books/book-list/book-list.component';
 
 export const routes: Routes = [
   {
@@ -12,7 +12,7 @@ export const routes: Routes = [
   {
     path: '',
     title: 'Home',
-    component: LayoutComponent,
+    component: BookListComponent,
     canActivate: [authGuard],
   },
 ];
