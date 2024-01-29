@@ -1,7 +1,16 @@
 {
   "users": [
-    { "id": 1, "username": "admin", "password": "admin@123", "isAdmin": true },
-    { "id": 2, "username": "user", "password": "user@123" }
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin@123",
+      "isAdmin": true
+    },
+    {
+      "id": 2,
+      "username": "user",
+      "password": "user@123"
+    }
   ],
   "books": [
     {
@@ -13,7 +22,7 @@
       "category": "Science Fiction",
       "quantity": 10,
       "inventoryStatus": "INSTOCK",
-      "rating": 4.5
+      "rating": 4
     },
     {
       "id": 2,
@@ -24,7 +33,7 @@
       "category": "Literature",
       "quantity": 5,
       "inventoryStatus": "LOWSTOCK",
-      "rating": 4.0
+      "rating": 4
     },
     {
       "id": 3,
@@ -35,7 +44,7 @@
       "category": "Fantasy",
       "quantity": 20,
       "inventoryStatus": "INSTOCK",
-      "rating": 4.8
+      "rating": 4
     },
     {
       "id": 4,
@@ -46,7 +55,7 @@
       "category": "Mystery",
       "quantity": 15,
       "inventoryStatus": "INSTOCK",
-      "rating": 4.2
+      "rating": 4
     },
     {
       "id": 5,
@@ -57,7 +66,7 @@
       "category": "Historical Fiction",
       "quantity": 10,
       "inventoryStatus": "INSTOCK",
-      "rating": 4.1
+      "rating": 4
     },
     {
       "id": 6,
@@ -68,7 +77,7 @@
       "category": "Dystopian",
       "quantity": 12,
       "inventoryStatus": "INSTOCK",
-      "rating": 4.6
+      "rating": 4
     },
     {
       "id": 7,
@@ -79,7 +88,7 @@
       "category": "Fiction",
       "quantity": 8,
       "inventoryStatus": "LOWSTOCK",
-      "rating": 4.4
+      "rating": 4
     },
     {
       "id": 8,
@@ -90,7 +99,7 @@
       "category": "Fantasy",
       "quantity": 5,
       "inventoryStatus": "LOWSTOCK",
-      "rating": 4.9
+      "rating": 4
     },
     {
       "id": 9,
@@ -101,7 +110,7 @@
       "category": "Philosophy",
       "quantity": 10,
       "inventoryStatus": "INSTOCK",
-      "rating": 4.3
+      "rating": 4
     },
     {
       "id": 10,
@@ -112,7 +121,7 @@
       "category": "Literature",
       "quantity": 7,
       "inventoryStatus": "LOWSTOCK",
-      "rating": 4.7
+      "rating": 4
     },
     {
       "id": 11,
@@ -123,7 +132,7 @@
       "category": "Romance",
       "quantity": 15,
       "inventoryStatus": "INSTOCK",
-      "rating": 4.5
+      "rating": 4
     },
     {
       "id": 12,
@@ -134,7 +143,7 @@
       "category": "Military",
       "quantity": 20,
       "inventoryStatus": "INSTOCK",
-      "rating": 4.4
+      "rating": 4
     },
     {
       "id": 13,
@@ -145,13 +154,32 @@
       "category": "Biography",
       "quantity": 10,
       "inventoryStatus": "INSTOCK",
-      "rating": 4.6
+      "rating": 4
     }
   ],
   "carts": [
     {
       "usersId": 1,
-      "booksId": [1,2]
+      "booksId": [
+        1,
+        2
+      ]
+    }
+  ],
+  "product-carts": [
+    {
+      "booksId": 4,
+      "price": 12.99,
+      "quantity": 1,
+      "usersId": 2,
+      "id": 1
+    },
+    {
+      "booksId": 1,
+      "price": 9.99,
+      "quantity": 3,
+      "usersId": 2,
+      "id": 2
     }
   ]
 }

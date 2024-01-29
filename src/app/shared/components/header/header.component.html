@@ -12,15 +12,22 @@
     <ng-template pTemplate="end">
       <div class="flex gap-3 align-items-center">
         <div class="cart mr-2">
-          <a routerLink="/cart">
-            <i class="pi pi-shopping-cart p-3 border-circle hover:surface-200"></i>
-          </a>
+          <i
+            class="relative cursor-pointer text-lg p-3 pi pi-shopping-cart border-circle transition-linear transition-duration-300 hover:surface-200"
+            (click)="handleToggleOverlayPanel($event)"
+          >
+            <p-badge
+              *ngIf="cartItems.length"
+              styleClass="absolute top-0"
+              [value]="cartItems.length.toString()"
+            ></p-badge>
+          </i>
+          <p-overlayPanel #op>
+            <img src="https://primefaces.org/cdn/primeng/images/demo/product/bamboo-watch.jpg" alt="product" />
+        </p-overlayPanel>
         </div>
         <div class="login">
-          <p-button
-            label="Logout"
-            (click)="handleLogout()"
-          ></p-button>
+          <p-button label="Logout" (click)="handleLogout()"></p-button>
         </div>
       </div>
     </ng-template>

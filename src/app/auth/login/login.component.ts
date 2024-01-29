@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { catchError, throwError } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { CartService } from '../../shared/services/cart.service';
 
 @Component({
   selector: 'app-login',
@@ -60,7 +61,8 @@ export class LoginComponent {
         )
         .subscribe((response) => {
           if (response.length) {
-            localStorage.setItem('user', JSON.stringify(response[0]));
+            const user = response[0];
+            localStorage.setItem('user', JSON.stringify(user));
             this.authService.isAuthenticated = true;
 
             this.router.navigate(['/']);
