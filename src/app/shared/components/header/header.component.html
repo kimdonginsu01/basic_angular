@@ -23,8 +23,63 @@
             ></p-badge>
           </i>
           <p-overlayPanel #op>
-            <img src="https://primefaces.org/cdn/primeng/images/demo/product/bamboo-watch.jpg" alt="product" />
-        </p-overlayPanel>
+            <ng-template pTemplate="content">
+              <p-table [value]="cartItems" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Image</th>
+                    <th class="text-center">Price</th>
+                    <th class="text-center">Quantity</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-product>
+                  <tr>
+                    <td class="w-10rem">{{ product?.books?.name }}</td>
+                    <td>
+                      <img
+                        [src]="
+                          'https://picsum.photos/80/70?random=' + product?.id
+                        "
+                        [alt]="product?.image"
+                        class="w-5rem shadow-2 border-round"
+                      />
+                    </td>
+                    <td>${{ product?.price }}</td>
+                    <td>
+                      <p-inputNumber
+                        [ngModel]="product?.quantity"
+                        [showButtons]="true"
+                        buttonLayout="horizontal"
+                        inputStyleClass="w-3rem text-center"
+                        decrementButtonClass="p-button-text"
+                        incrementButtonClass="p-button-text"
+                        incrementButtonIcon="pi pi-plus"
+                        decrementButtonIcon="pi pi-minus"
+                        [min]="1"
+                        [max]="20"
+                        (onInput)="handleUpdateCart($event, product?.id)"
+                      >
+                      </p-inputNumber>
+                    </td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                  <div
+                    class="flex flex-column align-items-center justify-content-center"
+                  >
+                    <div class="text-900 mb-4 font-medium">
+                      Your cart total is ${{ totalPrice | number: '1.2' }}
+                    </div>
+                    <p class="text-700 font-medium mt-0 mb-4">
+                      FREE SHIPPING AND RETURN
+                    </p>
+                    <p-button label="Check Out"></p-button>
+                  </div>
+                </ng-template>
+              </p-table>
+            </ng-template>
+          </p-overlayPanel>
         </div>
         <div class="login">
           <p-button label="Logout" (click)="handleLogout()"></p-button>

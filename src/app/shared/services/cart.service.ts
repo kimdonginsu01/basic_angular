@@ -5,7 +5,7 @@ import { Cart } from '../../books/shared/models/cart';
 import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
   private cartSubject = new Subject();
@@ -17,8 +17,14 @@ export class CartService {
     return this.httpService.post(baseUrl + '/product-carts', data);
   }
 
+  updateCartProduct(id: number | string, data: any) {
+    return this.httpService.patch(baseUrl + '/product-carts/' + id, data);
+  }
+
   getUserCart(userId: number) {
-    return this.httpService.get(baseUrl + '/product-carts?_expand=books&usersId=' + userId);
+    return this.httpService.get(
+      baseUrl + '/product-carts?_expand=books&usersId=' + userId
+    );
   }
 
   updateCart(value: any) {

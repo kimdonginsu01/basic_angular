@@ -6,12 +6,17 @@ import { BookDetailComponent } from './books/book-detail/book-detail.component';
 
 export const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full',
+  },
+  {
     path: 'login',
     title: 'Login',
     component: LoginComponent,
   },
   {
-    path: '',
+    path: 'home',
     title: 'Home',
     component: BookListComponent,
     canActivate: [authGuard],

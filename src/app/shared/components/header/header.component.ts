@@ -8,6 +8,11 @@ import { CartService } from '../../services/cart.service';
 import { BadgeModule } from 'primeng/badge';
 import { CommonModule } from '@angular/common';
 import { OverlayPanel, OverlayPanelModule } from 'primeng/overlaypanel';
+import { DropdownModule } from 'primeng/dropdown';
+import { TableModule } from 'primeng/table';
+import { InputNumberInputEvent, InputNumberModule } from 'primeng/inputnumber';
+import { FormsModule } from '@angular/forms';
+import { Subject, debounceTime, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +23,10 @@ import { OverlayPanel, OverlayPanelModule } from 'primeng/overlaypanel';
     BadgeModule,
     CommonModule,
     OverlayPanelModule,
+    DropdownModule,
+    TableModule,
+    InputNumberModule,
+    FormsModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -25,7 +34,13 @@ import { OverlayPanel, OverlayPanelModule } from 'primeng/overlaypanel';
 export class HeaderComponent implements OnInit {
   @ViewChild(OverlayPanel) private op!: OverlayPanel;
   items: MenuItem[];
-  cartItems = [];
+  cartItems: any = [];
+  totalPrice: number = 0;
+
+  private updateCartSubject = new Subject<{
+    event: InputNumberInputEvent;
+    productId: number;
+  }>();
 
   constructor(
     public authService: AuthService,
@@ -43,14 +58,44 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     const { id } = this.authService.getCurrentUser();
-    this.cartService.getUserCart(id).subscribe({
+    this.cartService.cart$.subscribe((value: any) => {
+      this.cartItems = value;
+      this.totalPrice = this.calculateTotalPrice(this.cartItems);
+    });
+
+    this.getUserCart(id);
+
+    this.updateCartSubject
+      .pipe(
+        debounceTime(300),
+        switchMap(({ event, productId }) => {
+          return this.cartService.updateCartProduct(productId, {
+            quantity: event.value,
+          });
+        }),
+        switchMap(() => {
+          const { id } = this.authService.getCurrentUser();
+          return this.cartService.getUserCart(id);
+        })
+      )
+      .subscribe((updatedCart) => {
+        this.cartItems = updatedCart;
+        this.totalPrice = this.calculateTotalPrice(this.cartItems);
+      });
+  }
+
+  getUserCart(userId: number) {
+    this.cartService.getUserCart(userId).subscribe({
       next: (res) => {
         this.cartService.updateCart(res);
       },
     });
-    this.cartService.cart$.subscribe((value: any) => {
-      this.cartItems = value;
-    });
+  }
+
+  calculateTotalPrice(cartItems: any[]) {
+    return cartItems.reduce((acc, curr) => {
+      return acc + curr.price * curr.quantity;
+    }, 0);
   }
 
   handleLogout() {
@@ -59,7 +104,11 @@ export class HeaderComponent implements OnInit {
   }
 
   handleToggleOverlayPanel(event: any) {
-    console.log(this.cartItems)
+    console.log(this.cartItems);
     this.op.toggle(event);
+  }
+
+  handleUpdateCart(event: InputNumberInputEvent, productId: number) {
+    this.updateCartSubject.next({ event, productId });
   }
 }

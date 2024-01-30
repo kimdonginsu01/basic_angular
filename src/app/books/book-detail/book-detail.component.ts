@@ -13,6 +13,7 @@ import { CartService } from '../../shared/services/cart.service';
 import { AuthService } from '../../auth/auth.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-book-detail',
@@ -25,7 +26,7 @@ import { ToastModule } from 'primeng/toast';
     InputNumberModule,
     TagModule,
     ButtonModule,
-    ToastModule
+    ToastModule,
   ],
   templateUrl: './book-detail.component.html',
   styleUrl: './book-detail.component.scss',
@@ -68,18 +69,38 @@ export class BookDetailComponent implements OnInit {
       quantity: this.quantity,
       usersId: id,
     };
+
+    this.handleGetUserCart(id);
+
+    let isExist: any[];
+
+    this.cartService.cart$.pipe(take(1)).subscribe({
+      next: (value: any) => {
+        isExist = value.filter(
+          (v: any) => v.usersId === id && v.booksId === this.product.id
+        );
+
+        if (isExist.length) {
+          this.handleUpdateCart(isExist[0].id, {
+            ...productCartData,
+            quantity: isExist[0].quantity + this.quantity,
+          });
+        } else {
+          this.handleCreateCart(productCartData);
+        }
+
+        this.handleGetUserCart(id);
+      },
+    });
+  }
+
+  handleCreateCart(productCartData: any) {
     this.cartService.createCartProduct(productCartData).subscribe({
       next: () => {
         this.msgService.add({
           severity: 'success',
           summary: 'Success',
           detail: 'Add product to cart successfully!',
-        });
-
-        this.cartService.getUserCart(id).subscribe({
-          next: (res) => {
-            this.cartService.updateCart(res);
-          },
         });
       },
       error: () => {
@@ -88,6 +109,35 @@ export class BookDetailComponent implements OnInit {
           summary: 'Error',
           detail: 'Add product to cart failed!',
         });
+      },
+    });
+  }
+
+  handleUpdateCart(productCartId: number, productCartData: any) {
+    this.cartService
+      .updateCartProduct(productCartId, productCartData)
+      .subscribe({
+        next: () => {
+          this.msgService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Add product to cart successfully!',
+          });
+        },
+        error: () => {
+          this.msgService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Add product to cart failed!',
+          });
+        },
+      });
+  }
+
+  handleGetUserCart(userId: number) {
+    this.cartService.getUserCart(userId).subscribe({
+      next: (res) => {
+        this.cartService.updateCart(res);
       },
     });
   }

@@ -19,6 +19,7 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private messageService: MessageService,
+    private cartService: CartService,
     private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
@@ -65,7 +66,11 @@ export class LoginComponent {
             localStorage.setItem('user', JSON.stringify(user));
             this.authService.isAuthenticated = true;
 
-            this.router.navigate(['/']);
+            this.router.navigate(['home']);
+
+            this.cartService.getUserCart(user.id).subscribe(cart => {
+              this.cartService.updateCart(cart);
+            });
 
             // setTimeout(() => {
             //   localStorage.removeItem('user');
