@@ -1,4 +1,6 @@
 <header>
+  <p-toast></p-toast>
+  <p-confirmDialog></p-confirmDialog>
   <p-menubar [model]="items">
     <ng-template pTemplate="start">
       <img
@@ -31,6 +33,7 @@
                     <th class="text-center">Image</th>
                     <th class="text-center">Price</th>
                     <th class="text-center">Quantity</th>
+                    <th class="text-center">Action</th>
                   </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-rowData let-product>
@@ -58,9 +61,14 @@
                         decrementButtonIcon="pi pi-minus"
                         [min]="1"
                         [max]="20"
+                        [maxlength]="2"
                         (onInput)="handleUpdateCart($event, product?.id)"
+                        [allowEmpty]="false"
                       >
                       </p-inputNumber>
+                    </td>
+                    <td>
+                      <p-button (click)="handleDeleteCartItem($event, product?.id)" styleClass="p-button-danger" icon="pi pi-trash"></p-button>
                     </td>
                   </tr>
                 </ng-template>
