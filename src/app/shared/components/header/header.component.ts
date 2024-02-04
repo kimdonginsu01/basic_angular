@@ -6,6 +6,7 @@ import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { BadgeModule } from 'primeng/badge';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberInputEvent, InputNumberModule } from 'primeng/inputnumber';
 import { MenubarModule } from 'primeng/menubar';
@@ -15,7 +16,6 @@ import { ToastModule } from 'primeng/toast';
 import { Subject, debounceTime, of, switchMap } from 'rxjs';
 import { AuthService } from '../../../auth/auth.service';
 import { CartService } from '../../services/cart.service';
-import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 @Component({
   selector: 'app-header',
@@ -57,14 +57,27 @@ export class HeaderComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {
-    const { id } = this.authService.getCurrentUser();
+    const { id, isAdmin } = this.authService.getCurrentUser();
     this.currentUserId = id;
     this.items = [
       { label: 'Home', routerLink: '/home' },
-      { label: 'Books', routerLink: '/books' },
-      { label: 'Authors', routerLink: '/authors' },
-      { label: 'Genres', routerLink: '/genres' },
-      { label: 'Best Sellers', routerLink: '/bestsellers' },
+      {
+        label: 'Dashboard',
+        visible: !!isAdmin,
+        items: [
+          {
+            label: 'Books',
+            routerLink: '/dashboard/books',
+          },
+          {
+            label: 'Users',
+            routerLink: '/dashboard/users',
+          },
+        ],
+      },
+      // { label: 'Authors', routerLink: '/authors' },
+      // { label: 'Genres', routerLink: '/genres' },
+      // { label: 'Best Sellers', routerLink: '/bestsellers' },
     ];
   }
 
@@ -130,9 +143,8 @@ export class HeaderComponent implements OnInit {
     this.updateCartSubject.next({ event, productId });
   }
 
-  handleDeleteCartItem(event: Event, userId: number) {
+  handleDeleteCartItem(event: Event, productId: number) {
     event.stopPropagation();
-    console.log(userId)
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'Do you want to delete this item?',
@@ -144,15 +156,14 @@ export class HeaderComponent implements OnInit {
       rejectIcon: 'none',
 
       accept: () => {
-        // this.cartService.deleteCartItem(productId).subscribe(() => {
-        //   this.messageService.add({
-        //     severity: 'info',
-        //     summary: 'Confirmed',
-        //     detail: 'Item deleted',
-        //   });
-        //   // Refresh the cart after deletion
-        //   this.getUserCart(this.currentUserId);
-        // });
+        this.cartService.deleteCartProduct(productId).subscribe(() => {
+          this.messageService.add({
+            severity: 'info',
+            summary: 'Confirmed',
+            detail: 'Item deleted',
+          });
+          this.getUserCart(this.currentUserId);
+        });
       },
     });
   }

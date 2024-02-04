@@ -19,4 +19,8 @@ export class HttpService {
   patch(url: string, body: any): Observable<any> {
     return this.http.patch(url, body);
   }
+
+  delete(url: string, params?: any): Observable<any> {
+    return this.http.delete(url, { params });
+  }
 }

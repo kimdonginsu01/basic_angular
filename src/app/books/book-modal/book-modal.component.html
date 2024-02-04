@@ -1,0 +1,190 @@
+<form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+  <div class="grid nested-grid m-0">
+    <div class="col-12">
+      <div class="grid">
+        <span class="col-2">Code</span>
+        <input class="col-10" pInputText formControlName="code" />
+        <span class="col-2"></span>
+        <div
+          class="mt-1"
+          *ngIf="
+            bookForm.get('code')?.errors &&
+            (bookForm.get('code')?.dirty ||
+              bookForm.get('code')?.touched)
+          "
+        >
+          <small
+            class="text-red-500"
+            *ngIf="bookForm.get('code')?.hasError('required')"
+            >Code is required.</small
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="grid">
+        <span class="col-2">Name:</span>
+        <input class="col-10" pInputText formControlName="name" />
+        <span class="col-2"></span>
+        <div
+          class="mt-1"
+          *ngIf="
+            bookForm.get('name')?.errors &&
+            (bookForm.get('name')?.dirty ||
+              bookForm.get('name')?.touched)
+          "
+        >
+          <small
+            class="text-red-500"
+            *ngIf="bookForm.get('name')?.hasError('required')"
+            >Name is required.</small
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="grid">
+        <span class="col-2">Description:</span>
+        <textarea
+          class="col-10"
+          pInputTextarea
+          [autoResize]="true"
+          formControlName="description"
+        ></textarea>
+        <div class="col-2"></div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="grid">
+        <span class="col-2">Price: </span>
+        <p-inputNumber [allowEmpty]="false" [min]="1" formControlName="price"></p-inputNumber>
+
+        <div class="col-12 pb-0">
+          <div class="grid">
+            <span class="col-2"></span>
+            <div
+              class="mt-1"
+              *ngIf="
+                bookForm.get('price')?.errors &&
+                (bookForm.get('price')?.dirty ||
+                  bookForm.get('price')?.touched)
+              "
+            >
+              <small
+                class="text-red-500"
+                *ngIf="bookForm.get('price')?.hasError('required')"
+                >Price is required.</small
+              >
+              <small
+              class="text-red-500"
+              *ngIf="bookForm.get('price')?.hasError('min')"
+              >Price must be greater than 1.</small
+            >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="grid">
+        <span class="col-2">Category:</span>
+        <input class="col-10" pInputText formControlName="category" />
+        <span class="col-2"></span>
+        <div
+          class="mt-1"
+          *ngIf="
+            bookForm.get('category')?.errors &&
+            (bookForm.get('category')?.dirty ||
+              bookForm.get('category')?.touched)
+          "
+        >
+          <small
+            class="text-red-500"
+            *ngIf="bookForm.get('category')?.hasError('required')"
+            >Category is required.</small
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="grid">
+        <span class="col-2">Quantity:</span>
+        <p-inputNumber [allowEmpty]="false" [min]="1" formControlName="quantity"></p-inputNumber>
+
+        <div class="col-12 pb-0">
+          <div class="grid">
+            <span class="col-2"></span>
+            <div
+              class="mt-1"
+              *ngIf="
+                bookForm.get('quantity')?.errors &&
+                (bookForm.get('quantity')?.dirty ||
+                  bookForm.get('quantity')?.touched)
+              "
+            >
+              <small
+                class="text-red-500"
+                *ngIf="bookForm.get('quantity')?.hasError('required')"
+                >Quantity is required.</small
+              >
+              <small
+                class="text-red-500"
+                *ngIf="bookForm.get('quantity')?.hasError('min')"
+                >Quantity must be greater than 1.</small
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="grid">
+        <span class="col-2">Inventory Status:</span>
+        <p-dropdown
+          [options]="inventoryStatusOptions"
+          formControlName="inventoryStatus"
+          [appendTo]="'body'"
+        ></p-dropdown>
+
+        <div class="col-12 py-0">
+          <div class="grid">
+            <span class="col-2"></span>
+            <div
+              class="mt-1"
+              *ngIf="
+                bookForm.get('inventoryStatus')?.errors &&
+                (bookForm.get('inventoryStatus')?.dirty ||
+                  bookForm.get('inventoryStatus')?.touched)
+              "
+            >
+              <small
+                class="text-red-500"
+                *ngIf="bookForm.get('inventoryStatus')?.hasError('required')"
+                >Inventory Status is required.</small
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="grid">
+        <span class="col-2">Rating:</span>
+        <p-rating
+          [cancel]="false"
+          [readonly]="true"
+          formControlName="rating"
+        ></p-rating>
+      </div>
+    </div>
+
+    <button class="mx-auto" pButton type="submit" label="Submit"></button>
+  </div>
+</form>

@@ -29,4 +29,13 @@ export class AuthService {
     const info = localStorage.getItem('user');
     return JSON.parse(info as string);
   }
+
+  isAdmin() {
+    const info = localStorage.getItem('user');
+    if (info) {
+      const { isAdmin } = JSON.parse(info);
+      return !!isAdmin;
+    }
+    return false;
+  }
 }

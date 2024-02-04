@@ -27,6 +27,10 @@ export class CartService {
     );
   }
 
+  deleteCartProduct(id: number | string) {
+    return this.httpService.delete(baseUrl + '/product-carts/' + id);
+  }
+
   updateCart(value: any) {
     this.cartSubject.next(value);
   }

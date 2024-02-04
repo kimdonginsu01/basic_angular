@@ -17,8 +17,8 @@
       "id": 1,
       "code": "BK-001",
       "name": "The Hitchhiker's Guide to the Galaxy",
-      "description": "A classic science fiction comedy novel by Douglas Adams",
-      "price": 9.99,
+      "description": "A classic science fiction comedy novel by Douglas Adams. One of top 5 books of all times",
+      "price": 9,
       "category": "Science Fiction",
       "quantity": 10,
       "inventoryStatus": "INSTOCK",
@@ -73,7 +73,7 @@
       "code": "BK-006",
       "name": "The Hunger Games",
       "description": "A dystopian novel by Suzanne Collins",
-      "price": 9.99,
+      "price": 15,
       "category": "Dystopian",
       "quantity": 12,
       "inventoryStatus": "INSTOCK",
@@ -168,39 +168,25 @@
   ],
   "product-carts": [
     {
-      "booksId": 4,
-      "price": 12.99,
+      "booksId": 1,
+      "price": 9.99,
       "quantity": 1,
       "usersId": 2,
       "id": 1
     },
     {
-      "booksId": 1,
-      "price": 9.99,
-      "quantity": 1,
+      "booksId": 2,
+      "price": 8.99,
+      "quantity": 2,
       "usersId": 2,
       "id": 2
     },
     {
-      "booksId": 13,
-      "price": 7.99,
+      "booksId": 6,
+      "price": 9.99,
       "quantity": 1,
       "usersId": 2,
       "id": 3
-    },
-    {
-      "booksId": 3,
-      "price": 10.99,
-      "quantity": 1,
-      "usersId": 2,
-      "id": 4
-    },
-    {
-      "booksId": 5,
-      "price": 11.99,
-      "quantity": 1,
-      "usersId": 2,
-      "id": 5
     }
   ]
 }
